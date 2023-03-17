@@ -1,12 +1,13 @@
-import asyncio
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.openapi.utils import get_openapi
 from fastapi.responses import JSONResponse
 from sqlalchemy.ext.declarative import declarative_base
-from app.db.base import database, metadata, engine
+from app.db.base import database, engine
+from app.db.users_model import User
 from app.config.settings import settings
 from app.api.routes.users_routes import user_router
+# from fastapi.commands import FastAPICommand
 
 saBase = declarative_base()
 
@@ -22,20 +23,13 @@ app.add_middleware(
 )
 
 
-# Database connection
+
+# Criação e conexão com o banco de dados:
 @app.on_event("startup")
 async def startup():
     await database.connect()
-#Criar todas as tabelas:
-# async def create_all_tables():
-    async with engine.begin() as conn:
-        print("Creating tables...")
-        try:
-            await conn.run_sync(saBase.metadata.create_all)
-            return print('Done!')
-        except Exception as e:
-            print(e)
-        # asyncio.run(create_all_tables())
+    # async with engine.begin() as conn:
+    #     await conn.run_sync(Base=metadata.create_all)
 
 
 @app.on_event("shutdown")
@@ -62,6 +56,7 @@ def custom_openapi():
 @app.get("/jsonCollection/", description='API Json Collection', tags=['JSON Collection'])
 async def get_open_api_endpoint():
     return JSONResponse(content=custom_openapi())
+
 
 if __name__ == '__main__':
     import uvicorn

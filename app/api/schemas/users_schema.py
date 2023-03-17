@@ -3,9 +3,9 @@ from pydantic import BaseModel
 
 class UserBase(BaseModel):
     cpf: str
-    name: str
+    nome: str
     email: str
-    phone: str
+    telefone: str
 
 
 class UserCreate(UserBase):
