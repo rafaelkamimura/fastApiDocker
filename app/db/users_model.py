@@ -2,7 +2,7 @@ from sqlalchemy import MetaData
 from databases import Database
 import ormar
 import sqlalchemy
-from app.db.base import database as db
+from db.base import database as db
 metadata = MetaData()
 # class BaseMeta(ModelMeta):
 #     class Meta:

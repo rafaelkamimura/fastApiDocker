@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException
 from typing import List
-from app.db.users_model import User
-from app.api.schemas.users_schema import UserCreate, UserUpdate
+from db.users_model import User
+from api.schemas.users_schema import UserCreate, UserUpdate
 
 user_router = APIRouter()
 

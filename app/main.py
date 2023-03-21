@@ -3,10 +3,10 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.openapi.utils import get_openapi
 from fastapi.responses import JSONResponse
 from sqlalchemy.ext.declarative import declarative_base
-from app.db.base import database, engine
-from app.db.users_model import User
-from app.config.settings import settings
-from app.api.routes.users_routes import user_router
+from db.base import database, engine
+from db.users_model import User
+from config.settings import settings
+from api.routes.users_routes import user_router
 # from fastapi.commands import FastAPICommand
 
 saBase = declarative_base()
